@@ -1,7 +1,15 @@
 import React from 'react';
+import Products from './components/Products';
+import Cart from './pages/Cart';
 
-const App: React.FC = () => {
-  return <h1>Marketplace</h1>;
-};
+import GlobalStyle from './styles/global';
+
+const App: React.FC = () => (
+  <>
+    <Cart />
+    <Products />
+    <GlobalStyle />
+  </>
+);
 
 export default App;
