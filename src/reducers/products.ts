@@ -10,6 +10,7 @@ const productReducer = (
 ): Product[] => {
   switch (action.type) {
     case ADD_PRODUCT:
+      console.log(action.product);
       return [...state, action.product];
     default:
       return state;

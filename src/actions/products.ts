@@ -8,18 +8,19 @@ export const addProduct = (product: Product): ProductActionTypes => ({
   product,
 });
 
-export const startAddProduct = (productData: { name: string }) => {
-  return (dispatch: Dispatch<ProductActionTypes>, getState: () => AppState) => {
-    const { name = '' } = productData;
-    const expense = { name };
+// export const startAddProduct = (productData: {
+//   name: string;
+//   size: string;
+// }) => {
+//   return (dispatch: Dispatch<ProductActionTypes>): ProductActionTypes => {
+//     console.log('startadd');
+//     const { name = '', size = '' } = productData;
+//     const product = { name, size };
 
-    // const id = Math.random().toString(36).substr(2, 9);
-
-    return dispatch(
-      addProduct({
-        // id,
-        ...expense,
-      }),
-    );
-  };
-};
+//     return dispatch(
+//       addProduct({
+//         ...product,
+//       }),
+//     );
+//   };
+// };
