@@ -5,7 +5,6 @@ import { AppState } from '../../store/configureStore';
 const Cart: React.FC = () => {
   const products = useSelector((state: AppState) => state.products);
   const cartLength = products.length;
-  // const { name, image, price } = products;
   console.log('products', products);
 
   return (
