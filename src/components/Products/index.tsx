@@ -32,11 +32,14 @@ const Products: React.FC = () => {
     name: string,
     image: string,
     actualPrice: string,
+    color: string,
   ): void => {
     if (!selectedSize) {
       return;
     }
-    dispatch(addProduct({ id, name, image, size: selectedSize, actualPrice }));
+    dispatch(
+      addProduct({ id, name, image, size: selectedSize, actualPrice, color }),
+    );
     setSelectedSize('');
     setIsFocused(false);
   };
@@ -59,6 +62,7 @@ const Products: React.FC = () => {
           discount_percentage: discountPercentage,
           on_sale: onSale,
           installments,
+          color,
         } = product;
         return (
           <Content key={uuid()}>
@@ -88,7 +92,9 @@ const Products: React.FC = () => {
             <Installments>{installments}</Installments>
             {onSale && <OnSale>Oferta</OnSale>}
 
-            <AddToCart onClick={() => addToCart(id, name, image, actualPrice)}>
+            <AddToCart
+              onClick={() => addToCart(id, name, image, actualPrice, color)}
+            >
               Adicionar
             </AddToCart>
           </Content>

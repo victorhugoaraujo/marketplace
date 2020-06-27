@@ -5,9 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { store, persistor } from './store/configureStore';
 import Routes from './routes';
 
-// import Products from './components/Products';
-// import Cart from './pages/Cart';
-
 import GlobalStyle from './styles/global';
 
 const App: React.FC = () => (

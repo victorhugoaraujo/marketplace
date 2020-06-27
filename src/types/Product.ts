@@ -4,4 +4,5 @@ export interface Product {
   size: string;
   image: string;
   actualPrice: string;
+  color: string;
 }
