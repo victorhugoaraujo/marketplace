@@ -1,15 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/configureStore';
+import Header from '../../components/Header';
 
 const Cart: React.FC = () => {
   const products = useSelector((state: AppState) => state.products);
-  const cartLength = products.length;
-  console.log('products', products);
 
   return (
     <>
-      <h1>Cart {cartLength}</h1>
+      <Header>
+        <h1>Minha Sacola</h1>
+      </Header>
+
       {products.map(({ id, name, image, size, actualPrice }) => (
         <div key={id}>
           <p>{name}</p>

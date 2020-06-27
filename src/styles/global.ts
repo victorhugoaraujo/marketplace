@@ -9,7 +9,6 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #312E38;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -20,7 +19,9 @@ export default createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6{
     font-weight: 500;
-    color: #fff;
+  }
+  ul {
+    list-style: none;
   }
 
   button {
