@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   padding: 20px;
   background-color: #f7f7f7;
-  height: 100vh;
 `;
 
 export const ProdutDetailContainer = styled.div`
@@ -22,9 +21,35 @@ export const OrderDetails = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-color: #dedede;
-  border-radius: 5px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    background-color: #efefef;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 20px;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #dadada;
+    padding: 20px 0;
+  }
+  li:last-child {
+    border: none;
+  }
+
+  span {
+    font-weight: 500;
+    color: #666;
+    font-size: 18px;
+  }
+`;
+
+export const Price = styled.span`
+  color: #333;
+  font-weight: 600;
 `;
 
 export const ProdutDetails = styled.div`

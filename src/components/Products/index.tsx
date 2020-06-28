@@ -38,7 +38,15 @@ const Products: React.FC = () => {
       return;
     }
     dispatch(
-      addProduct({ id, name, image, size: selectedSize, actualPrice, color }),
+      addProduct({
+        id,
+        name,
+        image,
+        size: selectedSize,
+        actualPrice,
+        color,
+        quantity: 1,
+      }),
     );
     setSelectedSize('');
     setIsFocused(false);

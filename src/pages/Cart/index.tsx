@@ -13,10 +13,17 @@ import {
   OrderDetails,
   ProductQuantity,
   Title,
+  Price,
 } from './styles';
 
 const Cart: React.FC = () => {
   const products = useSelector((state: AppState) => state.products);
+
+  const productPrices = products.map((product) =>
+    parseFloat(product.actualPrice.replace(/[^\d,.]+/g, '')),
+  );
+
+  const total = productPrices.reduce((t, n) => t + n, 0);
 
   return (
     <>
@@ -26,42 +33,50 @@ const Cart: React.FC = () => {
 
       <Container>
         <ProdutDetailContainer>
-          {products.map(({ id, name, image, size, actualPrice, color }) => (
-            <ProdutDetails key={id}>
-              <ProdutDetailsImage src={image} alt={name} />
-              <ProductInfo>
-                <Title>{name}</Title>
-                <p>
-                  <strong>Tamanho: </strong>
-                  {size}
-                </p>
-                <p>
-                  <strong>Cor: </strong>
-                  {color}
-                </p>
-              </ProductInfo>
-              <ProductQuantity>
-                Quantidade
-                <button type="button">
-                  <FiMinusCircle />
-                </button>
-                <span>2</span>
-                <button type="button">
-                  <FiPlusCircle />
-                </button>
-              </ProductQuantity>
-            </ProdutDetails>
-          ))}
+          {products.map(
+            ({ id, name, image, size, actualPrice, color, quantity }) => (
+              <ProdutDetails key={id}>
+                <ProdutDetailsImage src={image} alt={name} />
+                <ProductInfo>
+                  <Title>{name}</Title>
+                  <p>
+                    <strong>Tamanho: </strong>
+                    {size}
+                  </p>
+                  <p>
+                    <strong>Cor: </strong>
+                    {color}
+                  </p>
+                </ProductInfo>
+                <ProductQuantity>
+                  Quantidade
+                  <button type="button" disabled={quantity <= 1}>
+                    <FiMinusCircle />
+                  </button>
+                  <span>{quantity}</span>
+                  <button type="button">
+                    <FiPlusCircle />
+                  </button>
+                </ProductQuantity>
+              </ProdutDetails>
+            ),
+          )}
         </ProdutDetailContainer>
         <OrderDetails>
-          <div>
-            <span>subtotal x itens</span>
-            <span>R$ 100,00</span>
-          </div>
-          <div>
-            <span>Valor Total</span>
-            <span>R$ 100,00</span>
-          </div>
+          <ul>
+            <li>
+              <span>Subtotal</span>
+              <Price>R$ {total}</Price>
+            </li>
+            <li>
+              <span>Descontos</span>
+              <Price>R$ 0,00</Price>
+            </li>
+            <li>
+              <span>Valor Total</span>
+              <Price>R$ {total}</Price>
+            </li>
+          </ul>
         </OrderDetails>
       </Container>
     </>
