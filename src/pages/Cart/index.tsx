@@ -19,9 +19,7 @@ import {
 const Cart: React.FC = () => {
   const products = useSelector((state: AppState) => state.products);
 
-  const productPrices = products.map((product) =>
-    parseFloat(product.actualPrice.replace(/[^\d,.]+/g, '')),
-  );
+  const productPrices = products.map((product) => product.actualPrice);
 
   const total = productPrices.reduce((t, n) => t + n, 0);
 
@@ -33,34 +31,32 @@ const Cart: React.FC = () => {
 
       <Container>
         <ProdutDetailContainer>
-          {products.map(
-            ({ id, name, image, size, actualPrice, color, quantity }) => (
-              <ProdutDetails key={id}>
-                <ProdutDetailsImage src={image} alt={name} />
-                <ProductInfo>
-                  <Title>{name}</Title>
-                  <p>
-                    <strong>Tamanho: </strong>
-                    {size}
-                  </p>
-                  <p>
-                    <strong>Cor: </strong>
-                    {color}
-                  </p>
-                </ProductInfo>
-                <ProductQuantity>
-                  Quantidade
-                  <button type="button" disabled={quantity <= 1}>
-                    <FiMinusCircle />
-                  </button>
-                  <span>{quantity}</span>
-                  <button type="button">
-                    <FiPlusCircle />
-                  </button>
-                </ProductQuantity>
-              </ProdutDetails>
-            ),
-          )}
+          {products.map(({ id, name, image, size, color, quantity }) => (
+            <ProdutDetails key={id}>
+              <ProdutDetailsImage src={image} alt={name} />
+              <ProductInfo>
+                <Title>{name}</Title>
+                <p>
+                  <strong>Tamanho: </strong>
+                  {size}
+                </p>
+                <p>
+                  <strong>Cor: </strong>
+                  {color}
+                </p>
+              </ProductInfo>
+              <ProductQuantity>
+                Quantidade
+                <button type="button" disabled={quantity <= 1}>
+                  <FiMinusCircle />
+                </button>
+                <span>{quantity}</span>
+                <button type="button">
+                  <FiPlusCircle />
+                </button>
+              </ProductQuantity>
+            </ProdutDetails>
+          ))}
         </ProdutDetailContainer>
         <OrderDetails>
           <ul>

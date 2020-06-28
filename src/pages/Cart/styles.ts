@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   padding: 20px;
   background-color: #f7f7f7;
+  height: 100vh;
 `;
 
 export const ProdutDetailContainer = styled.div`

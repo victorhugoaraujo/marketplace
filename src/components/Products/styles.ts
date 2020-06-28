@@ -7,8 +7,8 @@ interface SizeProps {
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 20px;
-  flex-wrap: wrap;
   background-color: #f7f7f7;
 `;
 
@@ -30,6 +30,10 @@ export const Content = styled.div`
   }
 `;
 
+export const ProductList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 export const Title = styled.h1`
   font-size: 18px;
   margin: 10px 0;
@@ -85,6 +89,7 @@ export const Size = styled.button<SizeProps>`
 export const RegularPrice = styled.span`
   text-decoration: line-through;
   font-size: 12px;
+  margin-right: 5px;
 `;
 
 export const ActualPrice = styled.span`
@@ -98,15 +103,49 @@ export const Installments = styled.span`
 export const OnSale = styled.span`
   position: absolute;
   right: 0;
-  top: 20px;
+  top: 60px;
+  display: inline-block;
+  background: orange;
+  color: white;
+  height: 2.5rem;
+  width: 4rem;
+  text-align: center;
+  line-height: 2.5rem;
 `;
 
 export const Discount = styled.span`
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 60px;
+  display: inline-block;
+  background: orange;
+  color: white;
+  height: 2.5rem;
+  width: 3rem;
+  text-align: center;
+  line-height: 2.5rem;
 `;
 export const PriceContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const Filter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  select {
+    border: 1px solid #cecece;
+    color: #6b6363;
+    background-color: transparent;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 0 10px;
+    height: 37px;
+    line-height: 37px;
+    text-align: left;
+    font-weight: 600;
+    margin-left: 10px;
+  }
 `;
