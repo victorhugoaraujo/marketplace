@@ -151,9 +151,13 @@ const Products: React.FC = () => {
               </SizeList>
               <PriceContainer>
                 {regularPrice !== actualPrice && (
-                  <RegularPrice>{`${currency} ${regularPrice}`}</RegularPrice>
+                  <RegularPrice>
+                    {`${currency} ${regularPrice.toFixed(2)}`}
+                  </RegularPrice>
                 )}
-                <ActualPrice>{`${currency} ${actualPrice}`}</ActualPrice>
+                <ActualPrice>
+                  {`${currency} ${actualPrice.toFixed(2)}`}
+                </ActualPrice>
               </PriceContainer>
               <Installments>{installments}</Installments>
               {onSale && <OnSale>Oferta</OnSale>}

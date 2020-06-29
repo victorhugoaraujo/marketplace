@@ -62,7 +62,7 @@ const Cart: React.FC = () => {
           <ul>
             <li>
               <span>Subtotal</span>
-              <Price>R$ {total}</Price>
+              <Price>R$ {total.toFixed(2)}</Price>
             </li>
             <li>
               <span>Descontos</span>
@@ -70,7 +70,7 @@ const Cart: React.FC = () => {
             </li>
             <li>
               <span>Valor Total</span>
-              <Price>R$ {total}</Price>
+              <Price>R$ {total.toFixed(2)}</Price>
             </li>
           </ul>
         </OrderDetails>

@@ -85,11 +85,13 @@ export const Size = styled.button<SizeProps>`
     cursor: auto;
   }
 
-  ${(props) =>
-    props.isFocused &&
-    css`
-      background-color: #c53030;
-    `}
+  &:focus {
+    ${(props) =>
+      props.isFocused &&
+      css`
+        background-color: ${shade(0.2, '#ff8080')};
+      `}
+  }
 `;
 export const RegularPrice = styled.span`
   text-decoration: line-through;
