@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const Badge = styled.span`
   position: absolute;
-  right: 10px;
+  right: 20px;
   top: 35px;
   padding: 0px 5px;
   background-color: #ff8080;

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { uuid } from 'uuidv4';
 import ProductsData from '../../database/db.json';
 import { addProduct } from '../../actions/products';
+import shadowImg from '../../assets/shadow.png';
 
 import {
   Container,
@@ -29,7 +30,6 @@ const Products: React.FC = () => {
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const [filterProducts, setFilterProducts] = useState('Todos');
 
   const addToCart = (
     id: string,
@@ -63,49 +63,35 @@ const Products: React.FC = () => {
 
   type HtmlEvent = React.ChangeEvent<HTMLSelectElement>;
 
-  // const filters = {
-  //   all: allProducts,
-  //   sale: allProducts.filter((product) => product.on_sale),
-  //   biggest: allProducts.sort((a, b) =>
-  //     a.actual_price < b.actual_price ? 1 : -1,
-  //   ),
-  //   smallest: allProducts.sort((a, b) =>
-  //     a.actual_price > b.actual_price ? 1 : -1,
-  //   ),
-  // };
-
   const handleSelect: React.EventHandler<HtmlEvent> = (event: HtmlEvent) => {
     const selectedOption = event.target.value;
-
-    // selectedOption === 'Ofertas' && filters[sale];
 
     if (selectedOption === 'sale') {
       const productOnSale = allProducts.filter((product) => product.on_sale);
       setProducts(productOnSale);
     }
     if (selectedOption === 'lowest') {
-      const greaterPriceOrder = allProducts.sort((a, b) =>
-        a.actual_price > b.actual_price ? 1 : -1,
-      );
-      setProducts(greaterPriceOrder);
+      const productLowestPrice = allProducts
+        .filter((product) => product.actual_price)
+        .sort((a, b) => (a.actual_price > b.actual_price ? 1 : -1));
+      setProducts(productLowestPrice);
     }
     if (selectedOption === 'biggest') {
-      const greaterPriceOrder = allProducts.sort((a, b) =>
-        a.actual_price < b.actual_price ? 1 : -1,
-      );
-      setProducts(greaterPriceOrder);
+      const productBiggestPrice = allProducts
+        .filter((product) => product.actual_price)
+        .sort((a, b) => (a.actual_price < b.actual_price ? 1 : -1));
+      setProducts(productBiggestPrice);
     }
     if (selectedOption === 'all') {
       setProducts(allProducts);
     }
-    setFilterProducts(selectedOption);
   };
 
   return (
     <Container>
       <Filter>
         Ordenar por:
-        <select onChange={handleSelect}>
+        <select onChange={(event) => handleSelect(event)}>
           <option value="all">Todos</option>
           <option value="sale">Ofertas</option>
           <option value="biggest">Maior Preço</option>
@@ -130,7 +116,7 @@ const Products: React.FC = () => {
           return (
             <Content key={uuid()}>
               <Title>{name}</Title>
-              <img src={image} alt={name} />
+              <img src={image || shadowImg} alt={name} />
               {discountPercentage && <Discount>{discountPercentage}</Discount>}
               <SizeList>
                 {sizes.map((productSize) => (
@@ -138,6 +124,11 @@ const Products: React.FC = () => {
                     <Size
                       isFocused={isFocused}
                       disabled={!productSize.available}
+                      title={
+                        !productSize.available
+                          ? 'Produto indisponível'
+                          : productSize.size
+                      }
                       type="button"
                       onClick={() => handleChangeSize(productSize.size)}
                     >

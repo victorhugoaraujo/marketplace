@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { shade } from 'polished';
+import { shade, lighten } from 'polished';
 
 interface SizeProps {
   isFocused: boolean;
@@ -27,6 +27,7 @@ export const Content = styled.div`
 
   img {
     max-width: 200px;
+    max-height: 260px;
   }
 `;
 
@@ -78,6 +79,11 @@ export const Size = styled.button<SizeProps>`
 
   &:hover {
     background-color: #ff8080;
+  }
+
+  &:disabled {
+    background-color: ${lighten(0.2, '#847c7c')};
+    cursor: auto;
   }
 
   ${(props) =>
@@ -134,6 +140,7 @@ export const Filter = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin: 0 10px;
 
   select {
     border: 1px solid #cecece;
