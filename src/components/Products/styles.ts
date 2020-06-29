@@ -20,7 +20,6 @@ export const Content = styled.div`
   align-items: center;
   position: relative;
   width: 290px;
-  max-width: 290px;
   margin: 10px;
   box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.2);
   background-color: #fff;
@@ -136,14 +135,15 @@ export const PriceContainer = styled.div`
   align-items: center;
 `;
 
-export const Filter = styled.div`
+export const FilterContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   margin: 0 10px;
 
   select {
-    border: 1px solid #cecece;
+    border: 1px solid #e8e7e7;
     color: #6b6363;
     background-color: transparent;
     -webkit-border-radius: 4px;
@@ -155,4 +155,24 @@ export const Filter = styled.div`
     font-weight: 600;
     margin-left: 10px;
   }
+`;
+
+export const SearchInput = styled.input`
+  flex: 1;
+  border: 1px solid #e8e7e7;
+  padding: 10px 10px 10px 50px;
+  margin-right: 20px;
+  border-radius: 50px;
+  background-color: #f8f8f9;
+`;
+
+export const SearchIcon = styled.i`
+  position: absolute;
+  color: #747474;
+  left: 50px;
+`;
+
+export const Filter = styled.div`
+  display: flex;
+  align-items: center;
 `;

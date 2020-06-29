@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { uuid } from 'uuidv4';
+import { FiSearch } from 'react-icons/fi';
 import ProductsData from '../../database/db.json';
 import { addProduct } from '../../actions/products';
 import shadowImg from '../../assets/shadow.png';
@@ -9,6 +10,7 @@ import {
   Container,
   Content,
   Filter,
+  FilterContainer,
   Title,
   AddToCart,
   SizeList,
@@ -21,6 +23,8 @@ import {
   ProductList,
   ActualPrice,
   Installments,
+  SearchInput,
+  SearchIcon,
 } from './styles';
 
 const Products: React.FC = () => {
@@ -30,6 +34,7 @@ const Products: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [filterProductBy, setFilterProductBy] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   const addToCart = (
     id: string,
@@ -79,17 +84,32 @@ const Products: React.FC = () => {
     setProducts(orderedProducts);
   }, [filterProductBy, allProducts]);
 
+  useEffect(() => {
+    const searchResult = products.filter((product) =>
+      product.name.toLowerCase().includes(searchInput),
+    );
+    setProducts(searchResult);
+  }, [searchInput]);
   return (
     <Container>
-      <Filter>
-        Ordenar por:
-        <select onChange={(event) => setFilterProductBy(event.target.value)}>
-          <option value="all">Todos</option>
-          <option value="sale">Ofertas</option>
-          <option value="biggest">Maior Preço</option>
-          <option value="lowest">Menor Preço</option>
-        </select>
-      </Filter>
+      <FilterContainer>
+        <SearchIcon>
+          <FiSearch />
+        </SearchIcon>
+        <SearchInput
+          onChange={(event) => setSearchInput(event.target.value)}
+          placeholder="Buscar.."
+        />
+        <Filter>
+          Ordenar por:
+          <select onChange={(event) => setFilterProductBy(event.target.value)}>
+            <option value="all">Todos</option>
+            <option value="sale">Ofertas</option>
+            <option value="biggest">Maior Preço</option>
+            <option value="lowest">Menor Preço</option>
+          </select>
+        </Filter>
+      </FilterContainer>
       <ProductList>
         {products.map((product) => {
           const id = uuid();
