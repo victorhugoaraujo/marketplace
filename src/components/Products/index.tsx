@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { uuid } from 'uuidv4';
 import ProductsData from '../../database/db.json';
@@ -22,7 +22,6 @@ import {
   ActualPrice,
   Installments,
 } from './styles';
-// import { Product } from '../../types/Product';
 
 const Products: React.FC = () => {
   const { products: allProducts } = ProductsData;
@@ -30,6 +29,7 @@ const Products: React.FC = () => {
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [filterProductBy, setFilterProductBy] = useState('');
 
   const addToCart = (
     id: string,
@@ -61,37 +61,29 @@ const Products: React.FC = () => {
     setIsFocused(true);
   };
 
-  type HtmlEvent = React.ChangeEvent<HTMLSelectElement>;
-
-  const handleSelect: React.EventHandler<HtmlEvent> = (event: HtmlEvent) => {
-    const selectedOption = event.target.value;
-
-    if (selectedOption === 'sale') {
-      const productOnSale = allProducts.filter((product) => product.on_sale);
-      setProducts(productOnSale);
+  useEffect(() => {
+    let orderedProducts = allProducts;
+    if (filterProductBy === 'sale') {
+      orderedProducts = allProducts.filter((product) => product.on_sale);
     }
-    if (selectedOption === 'lowest') {
-      const productLowestPrice = allProducts
+    if (filterProductBy === 'lowest') {
+      orderedProducts = allProducts
         .filter((product) => product.actual_price)
         .sort((a, b) => (a.actual_price > b.actual_price ? 1 : -1));
-      setProducts(productLowestPrice);
     }
-    if (selectedOption === 'biggest') {
-      const productBiggestPrice = allProducts
+    if (filterProductBy === 'biggest') {
+      orderedProducts = allProducts
         .filter((product) => product.actual_price)
         .sort((a, b) => (a.actual_price < b.actual_price ? 1 : -1));
-      setProducts(productBiggestPrice);
     }
-    if (selectedOption === 'all') {
-      setProducts(allProducts);
-    }
-  };
+    setProducts(orderedProducts);
+  }, [filterProductBy, allProducts]);
 
   return (
     <Container>
       <Filter>
         Ordenar por:
-        <select onChange={(event) => handleSelect(event)}>
+        <select onChange={(event) => setFilterProductBy(event.target.value)}>
           <option value="all">Todos</option>
           <option value="sale">Ofertas</option>
           <option value="biggest">Maior Preço</option>
